@@ -93,7 +93,3 @@ The project was verified through:
 ## Teamwork
 
 This project was completed as a **team-based implementation**. Work was divided across simulation, hardware-oriented Verilog development, seven-segment display integration, FPGA implementation, and report preparation. This repository intentionally omits personal names for privacy.
-
-## Notes
-
-This repository is intended to showcase the project architecture, implementation approach, and verification snapshots in a clean portfolio format suitable for academic and internship applications.

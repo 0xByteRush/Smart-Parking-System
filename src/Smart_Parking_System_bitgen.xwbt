@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\Xilinx\PROSS\Smart_Parking_System.ncd
+OUTFILE=C:\Xilinx\PROSS\Smart_Parking_System.bit
+FAMILY=Artix7
+PART=xc7a100t-3csg324
+WORKINGDIR=C:\Xilinx\PROSS
+LICENSE=WebPack
+USER_INFO=210828762_0_0_516

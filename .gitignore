@@ -1,0 +1,25 @@
+# Xilinx ISE project and build output
+*.xise
+*.gise
+*.ncd
+*.ngc
+*.ngd
+*.bit
+*.lso
+*.xwbt
+*.xmsgs
+*_summary.html
+*_envsettings.html
+par_usage_statistics.html
+planAhead_*
+webtalk*
+isim*
+fuse*
+impact*
+_xmsgs/
+xst/
+iseconfig/
+
+# Simulation output
+*.vvp
+*.vcd

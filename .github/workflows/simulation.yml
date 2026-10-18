@@ -1,0 +1,22 @@
+name: Simulation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  testbench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Icarus Verilog
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+      - name: Compile
+        run: iverilog -g2005 -o tb.vvp tb/tb_smart_parking.v src/smart_parking_system.v src/debounce.v src/DISP7SEG.v
+      - name: Run
+        run: |
+          vvp -n tb.vvp | tee sim.log
+          grep -q "ALL TESTS PASSED" sim.log

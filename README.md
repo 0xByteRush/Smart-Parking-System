@@ -1,5 +1,7 @@
 # Smart Parking System
 
+[![Simulation](https://github.com/0xByteRush/Smart-Parking-System/actions/workflows/simulation.yml/badge.svg)](https://github.com/0xByteRush/Smart-Parking-System/actions/workflows/simulation.yml)
+
 A Verilog-based Smart Parking System implemented on FPGA to track and display the number of available parking slots for both **normal** and **handicapped** parking areas.
 
 ## Overview
@@ -59,13 +61,27 @@ Uses a seven-segment display module to present the current counts for the parkin
 - **Seven-segment display interface**
 - **RGB / status LEDs**
 
+## Source Layout
+
+| Path | Contents |
+|---|---|
+| [`src/smart_parking_system.v`](src/smart_parking_system.v) | Top module `Smart_Parking_System`: counters, edge detection, LEDs |
+| [`src/debounce.v`](src/debounce.v) | Push-button debouncer (5 ms at 100 MHz) |
+| [`src/DISP7SEG.v`](src/DISP7SEG.v) | Multiplexed 8-digit seven-segment driver |
+| [`constraints/nexys_a7.ucf`](constraints/nexys_a7.ucf) | Clock, buttons and LED pins for the Nexys A7-100T |
+| [`constraints/disp7seg.ucf`](constraints/disp7seg.ucf) | Seven-segment pins |
+| [`tb/tb_smart_parking.v`](tb/tb_smart_parking.v) | Self-checking testbench |
+
 ## Verification
 
-The project was verified through:
-- simulation of saturating up/down counter behavior
-- hardware-oriented debouncing logic
-- edge-detection validation
-- FPGA implementation checks for display correctness
+The self-checking testbench covers reset, entries and exits, saturation at 0 and at full capacity for both lots, a held button counting only once, and the status LEDs. CI runs it on every push. To run it locally with Icarus Verilog:
+
+```bash
+iverilog -g2005 -o tb.vvp tb/tb_smart_parking.v src/smart_parking_system.v src/debounce.v src/DISP7SEG.v
+vvp -n tb.vvp
+```
+
+The design was also implemented on a Nexys A7-100T board (Xilinx ISE) and checked on the seven-segment display.
 
 ## Snapshots
 
@@ -81,15 +97,11 @@ The project was verified through:
 ### Handicapped Parking - Saturating Up Counter
 ![Handicap Parking Up Counter](images/simulation_handicap_up_counter.jpg)
 
-### Debouncer Module
-![Debouncer Module](images/debouncer_module_code.jpeg)
-
-### Smart Parking System Top Module - Part 1
-![Top Module Part 1](images/smart_parking_top_module_part1.jpeg)
-
-### Smart Parking System Top Module - Part 2
-![Top Module Part 2](images/smart_parking_top_module_part2.jpeg)
 
 ## Teamwork
 
 This project was completed as a **team-based implementation**. Work was divided across simulation, hardware-oriented Verilog development, seven-segment display integration, FPGA implementation, and report preparation. This repository intentionally omits personal names for privacy.
+
+## License
+
+[MIT](LICENSE)
